@@ -207,7 +207,7 @@ const TextComponent = (number) => {
                                 ORACIÓN PARA ABRIR ESPACIO SAGRADO
                             </ResponsiveText>
                             <ResponsiveText scale={0.6} style={{marginTop: '10px', color:"white"}}>
-                                Querido padre celestial, te pido que extiendas tu escudo de protección en cada rincón de este espacio dedicado a la sanación y al amor incondicional. Coloca tu guarda y custodia a todos los seres de luz que me acompañan: energías positivas, maestros ascendidos, ángeles guardianes, guías angelicales, arcángeles, serafines, querubines, la protección del amado concilio del Espíritu Santo que me guía, la presencia de la madre María que me asiste y la sabiduría de Jesús que me inspira, Amén.
+                                QUerido padre celestial, te pido que extiendas tu escudo de protección en cada rincón de este espacio dedicado a la sanación y al amor incondicional. Coloca tu guarda y custodia a todos los seres de luz que me acompañan: energías positivas, maestros ascendidos, ángeles guardianes, guías angelicales, arcángeles, serafines, querubines, la protección del amado concilio del Espíritu Santo que me guía, la presencia de la madre María que me asiste y la sabiduría de Jesús que me inspira, Amén.
                             </ResponsiveText>
                             <ResponsiveText scale={0.7} style={{marginTop: '20px',color:"white"}}>
                                 ORACIÓN PARA CERRAR ESPACIO SAGRADO
