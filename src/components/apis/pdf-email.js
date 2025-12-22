@@ -1,6 +1,7 @@
 import 'firebase/auth';
 import { petalos } from "../../../static/data";
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import watermarkImg from "../../../static/images/LOGO GENESIS_OSCURO..png";
 
 const createAndSendPDF = async () => {
     const existingPdfBytes = await loadPDF();
@@ -11,6 +12,39 @@ const createAndSendPDF = async () => {
     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const maxWidth = page.getSize().width - 30;
     let now = new Date();
+
+    // Marca de agua
+    const watermarkBytes = await fetch(watermarkImg).then(r => r.arrayBuffer());
+    const wm = await pdfDoc.embedPng(watermarkBytes); // ahora sí: es PNG
+
+    const aplicarMarcaDeAguaEnPagina = (page, opacity = 0.10) => {
+    const { width, height } = page.getSize();
+
+    const targetWidth = width * 0.9;
+    const scale = targetWidth / wm.width;
+
+    const wmWidth = wm.width * scale;
+    const wmHeight = wm.height * scale;
+
+    page.drawImage(wm, {
+        x: (width - wmWidth) / 2,
+        y: (height - wmHeight) / 2,
+        width: wmWidth,
+        height: wmHeight,
+        opacity, // subí/bajá esto
+    });
+    };
+
+    // 👉 Marca de agua en todas las páginas existentes del template
+    pdfDoc.getPages().forEach(p => aplicarMarcaDeAguaEnPagina(p, 0.10));
+
+    // 👉 Helper para crear SIEMPRE páginas nuevas con marca de agua
+    const addWatermarkedPage = () => {
+        const p = pdfDoc.addPage([595, 842]);
+        aplicarMarcaDeAguaEnPagina(p, 0.10); // se dibuja ANTES del texto
+        return p;
+    };
+
 
     let options = {
         timeZone: 'America/Argentina/Buenos_Aires',
@@ -50,7 +84,7 @@ const createAndSendPDF = async () => {
     }
 
     let y = 780;
-    let currentPage = pdfDoc.addPage([595, 842]);
+    let currentPage = addWatermarkedPage();
     const { petalosArray, ramifiArray } = getListOfPetalos();
 
     console.log(petalosArray);
@@ -59,14 +93,14 @@ const createAndSendPDF = async () => {
     for (const petalo of petalosArray) {
         console.log(petalo)
         if (y <= 30) {
-            currentPage = pdfDoc.addPage([595, 842]);
+            currentPage = addWatermarkedPage();
             y = 780;
         }
         //FUENTES
         if (petalo.title.toLowerCase().includes("fuente") && (petalo.linkName === 'petalo-1' || petalo.linkName === 'petalo-2' || petalo.linkName === 'petalo-3' || petalo.linkName === 'petalo-4' || petalo.linkName === 'petalo-5' || petalo.linkName === 'petalo-6' || petalo.linkName === 'petalo-7')) {
 
             if (y !== 780) {
-                currentPage = pdfDoc.addPage([595, 842]);
+                currentPage = addWatermarkedPage();
                 y = 780;
             }
 
@@ -79,7 +113,7 @@ const createAndSendPDF = async () => {
             });
             y = y - 35;
         } else {
-            const result = await textPetalo(petalo, currentPage, y, pdfDoc, maxWidth, font, fontBold);
+            const result = await textPetalo(petalo, currentPage, y, pdfDoc, maxWidth, font, fontBold, addWatermarkedPage);
             y = result.y;
             currentPage = result.currentPage
 
@@ -105,13 +139,13 @@ const createAndSendPDF = async () => {
                         });
                         y = y - 15;
                         if (y <= 30) {
-                            currentPage = pdfDoc.addPage([595, 842]);
+                            currentPage = addWatermarkedPage();
                             y = 780;
                         }
                     }
                     y = y - 20
                     if (y <= 30) {
-                        currentPage = pdfDoc.addPage([595, 842]);
+                        currentPage = addWatermarkedPage();
                         y = 780;
                     }
                 }
@@ -120,7 +154,7 @@ const createAndSendPDF = async () => {
     }
 
     if (y !== 780) {
-        currentPage = pdfDoc.addPage([595, 842]);
+        currentPage = addWatermarkedPage();
         y = 780;
     }
 
@@ -151,7 +185,7 @@ const createAndSendPDF = async () => {
 
     for (const petalo of ramifiArray) {
         if (y <= 30) {
-            currentPage = pdfDoc.addPage([595, 842]);
+            currentPage = addWatermarkedPage();
             y = 780;
         }
 
@@ -190,7 +224,7 @@ const createAndSendPDF = async () => {
                 y = y - 50;
 
                 if (y <= 30) {
-                    currentPage = pdfDoc.addPage([595, 842]);
+                    currentPage = addWatermarkedPage();
                     y = 780;
                 }
             }
@@ -206,7 +240,7 @@ const createAndSendPDF = async () => {
 
         }
         else {
-            const result = await textPetalo(petalo, currentPage, y, pdfDoc, maxWidth, font,fontBold);
+            const result = await textPetalo(petalo, currentPage, y, pdfDoc, maxWidth, font,fontBold, addWatermarkedPage);
             y = result.y;
             currentPage = result.currentPage
 
@@ -231,13 +265,13 @@ const createAndSendPDF = async () => {
                         });
                         y = y - 15;
                         if (y <= 30) {
-                            currentPage = pdfDoc.addPage([595, 842]);
+                            currentPage = addWatermarkedPage();
                             y = 780;
                         }
                     }
                     y = y - 20
                     if (y <= 30) {
-                        currentPage = pdfDoc.addPage([595, 842]);
+                        currentPage = addWatermarkedPage();
                         y = 780;
                     }
                 }
@@ -245,7 +279,7 @@ const createAndSendPDF = async () => {
         }
     }
 
-    currentPage = pdfDoc.addPage([595, 842]);
+    currentPage = addWatermarkedPage();
     y = 780;
 
     currentPage.drawText("CAMBIO CURATIVO", {
@@ -270,7 +304,7 @@ const createAndSendPDF = async () => {
         });
         y -= 15;
         if (y <= 30) {
-            currentPage = pdfDoc.addPage([595, 842]);
+            currentPage = addWatermarkedPage();
             y = 780;
         }
     });
@@ -287,7 +321,7 @@ const createAndSendPDF = async () => {
         });
         y -= 15;
         if (y <= 30) {
-            currentPage = pdfDoc.addPage([595, 842]);
+            currentPage = addWatermarkedPage();
             y = 780;
         }
     });
@@ -346,7 +380,7 @@ const createAndSendPDF = async () => {
 };
 
 
-const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBold) => {
+const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBold , addWatermarkedPage) => {
     if (petalo.subPetalos && petalo.subPetalos.length > 0) {
         if (petalo.title.length > 2) {
             const renderTitle = (petalo.title === 'Emociones')
@@ -363,7 +397,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
                 const estilo = getEstiloForTextField(line, font, fontBold, 12);
                 currentPage.drawText(line, { x: 22, y, size: estilo.size, color: estilo.color, font: estilo.font });
                 y -= 15;// interlineado normal
-                if (y <= 30) { currentPage = pdfDoc.addPage([595, 842]); y = 780; }
+                if (y <= 30) { currentPage = addWatermarkedPage(); y = 780; }
             }
             y -= 12; // 👈 antes era 30: espacio entre párrafos en subPetalos
         }
@@ -378,7 +412,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
         y -= (petalo.title === "CORRECCIONCLOSE") ? 22 : 45;
 
         if (petalo.title === "CORRECCIONCLOSE") {
-            if (y <= 30) { currentPage = pdfDoc.addPage([595, 842]); y = 780; }
+            if (y <= 30) { currentPage = addWatermarkedPage(); y = 780; }
             currentPage.drawLine({
                 start: { x: 22, y },
                 end: { x: currentPage.getSize().width - 22, y },
@@ -437,7 +471,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
                     });
                     y -= 16;// 👈 antes: 35 por línea
                     if (y <= 30) {
-                        currentPage = pdfDoc.addPage([595, 842]);
+                        currentPage = addWatermarkedPage();
                         y = 780;
                     }
                 }
@@ -470,7 +504,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
                     });
                     y -= 16;
                     if (y <= 30) {
-                        currentPage = pdfDoc.addPage([595, 842]);
+                        currentPage = addWatermarkedPage();
                         y = 780;
                     }
                 }
@@ -491,7 +525,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
                 const imgHeight = 100, imgWidth = 100;
                  // Verificar si la imagen entra en la página
                 if (y - imgHeight <= 30) {
-                    currentPage = pdfDoc.addPage([595, 842]);
+                    currentPage = addWatermarkedPage();
                     y = 780;
                 }
 
@@ -527,7 +561,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
     if (petalo.textField) {
         if (petalo.isLegado) {
             y -= 16;
-            if (y <= 30) { currentPage = pdfDoc.addPage([595, 842]); y = 780; }
+            if (y <= 30) { currentPage = addWatermarkedPage(); y = 780; }
 
             const contenido = (petalo.textField ?? "").toString();
             currentPage.drawText("HEREDADO DE:", { x: 22, y, size: 13, font: fontBold, color: rgb(0,0,0) });
@@ -565,7 +599,7 @@ if (petalo.textField && !petalo.isLegado) {
         });
         y -= LEADING;                 // <-- antes 12
         if (y <= 30) {                // control de salto de página
-            currentPage = pdfDoc.addPage([595, 842]);
+            currentPage = addWatermarkedPage();
             y = 780;
         }
         }
