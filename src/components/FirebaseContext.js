@@ -15,7 +15,7 @@ const firebaseConfig = {
 const FirebaseContext = createContext(null);
 
 function getFirebaseApp() {
-  // evita re-inicializaciones
+  // evita doble inicialización (Gatsby SSR)
   if (getApps().length > 0) return getApps()[0];
   return initializeApp(firebaseConfig);
 }
