@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Buttons from "../components/Buttons";
 import ResponsiveText from "../components/apis/ResponsiveText";
+import logo from "../images/logo.png";
 import {navigate} from "gatsby";
 import LoginCheck from "../components/login/LoginCheck";
 import {Background} from "../components/Commons";
@@ -45,6 +46,9 @@ const CirculoBase = () => {
 
     return <LoginCheck>
         <Background style={{backgroundImage: `url(/images/portada.webp)`}}>
+
+            <Logo src={logo} alt="Terapia Génesis" />
+            
             <Container>
                 <Title scale={0.8} color={"#fffdfd"}>
                     Terapia Cuántica GENESÍS
@@ -96,6 +100,19 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+`;
+const Logo = styled.img`
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  height: 10vh;
+  width: auto;
+  z-index: 999;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,0.55));
+
+  @media (max-width: 768px) {
+    height: 52px;
+  }
 `;
 
 export default CirculoBase;

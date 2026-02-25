@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Helmet } from "react-helmet";
 import backgroundImage from '../../static/images/portada.webp';
 import ResponsiveText from "../components/apis/ResponsiveText";
+import logo from "../images/logo.png";
 import {navigate} from "gatsby";
 import {useEffect, useState} from "react";
 import useInstall from "../components/UseInstall";
@@ -62,9 +63,7 @@ const Index = () => {
                         </Alert>
                     </ContainerAlert>}
                     <CenterContainer>
-                        <TerapiaText scale={1.5}>TERAPIA</TerapiaText>
-                        <TerapiaText scale={0.9}>CUÁNTICA</TerapiaText>
-                        <TerapiaText scale={1.8}>GÉNESIS</TerapiaText>
+                        <Logo src={logo} alt="Terapia Génesis" />
                         <StartButton onClick={() =>
                             handleStartButtonClick()
                         }>
@@ -154,11 +153,24 @@ const StyledMinimalisticInstallButton = styled.div`
   }
 `;
 
+const Logo = styled.img`
+  height: 40vh;     /* 🔥 más grande */
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 40px;
+  user-select: none;
 
-const TerapiaText = styled(ResponsiveText)`
-  margin-bottom: 20px;
-  letter-spacing: 15px;
-  color: white;
+  @media (max-width: 1024px) {
+    height: 260px;
+  }
+
+  @media (max-width: 768px) {
+    height: 220px;
+  }
+
+  @media (max-width: 480px) {
+    height: 180px;
+  }
 `;
 
 const Background = styled.div`
