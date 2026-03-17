@@ -104,8 +104,8 @@ const Container = styled.div`
 const Logo = styled.img`
   position: fixed;
   top: 18px;
-  left: 18px;
-  height: 10vh;
+  left: -15px;
+  height: 15vh;
   width: auto;
   z-index: 999;
   filter: drop-shadow(0 10px 22px rgba(0,0,0,0.55));
