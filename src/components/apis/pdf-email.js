@@ -811,11 +811,13 @@ const getListOfPetalos = () => {
 
             // Helper para acumular texto (a:b:c)
             const acc = (prev, val) => (prev ? `${prev}:${val}` : val);
+            const esVidaPasadaTexto = key === "petalo-5/7/1";
 
             if (
                 idx !== -1 &&         // ya existe ese pétalo en el array
                 p.textField &&        // viene nuevo texto
-                !enCorreccion         // (si querés acumular también en corrección, quitá esta condición)
+                !enCorreccion &&
+                !esVidaPasadaTexto   // 👈 NO mergear vidas pasadas         // (si querés acumular también en corrección, quitá esta condición)
             ) {
                 // ✅ MERGE en vez de reemplazar/borrar
                 const prev = petalosArray[idx];
