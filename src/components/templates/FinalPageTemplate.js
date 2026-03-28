@@ -11,6 +11,8 @@ import {Alert, TextField} from "@mui/material";
 import {petalos} from "../../../static/data";
 import { useRamificacion } from "../../context/RamificacionContext"; // Ajustá la ruta si es necesario
 import { LegadoButton  } from "../navigation/LegadoButton";
+import { bloquesExtraPorPrefijo } from "../../../static/oraciones"; 
+
 const FinalPageTemplate = ({ pageContext }) => {
 
     const [isTextFieldFocused, setIsTextFieldFocused] = useState(false);
@@ -20,7 +22,7 @@ const FinalPageTemplate = ({ pageContext }) => {
     const { isRamificando, setIsRamificando } = useRamificacion();
     const [open, setOpen] = useState(false);
 
-
+   
     const handleRamificar = () => {
         let history = localStorage.getItem("history");
         if (!history) history = [];
@@ -119,6 +121,17 @@ const FinalPageTemplate = ({ pageContext }) => {
 
 
     const {desc, titleText, image, titlePage, imageBody, separation, fieldText, linkName, subPetalos} = pageContext
+
+    //Oraciones
+    const bloqueExtraEncontrado = bloquesExtraPorPrefijo.find(item => {
+    const prefijos = Array.isArray(item.prefijo)
+    ? item.prefijo
+    : [item.prefijo]; // 👈 lo convierto en array si es string
+
+    return prefijos.some(pref => linkName.startsWith(pref));
+    });
+
+    const bloqueExtra = bloqueExtraEncontrado?.bloqueExtra;
     
     // ✅ Chequea si el TextField debe mostrarse: propio o algún hijo
     // Función recursiva que verifica si un pétalo o cualquiera de sus subPetalos
@@ -221,6 +234,31 @@ const FinalPageTemplate = ({ pageContext }) => {
                                 />
                                 </div>
                             )}
+
+                        {bloqueExtra && (
+                            <ExtraBlock>
+                                {bloqueExtra.contenido.map((item, index) => {
+                                    const esObjeto = typeof item === "object";
+
+                                    const mt = esObjeto ? item.mt ?? 10 : 10;
+
+                                    return (
+                                    <ExtraInfoText
+                                        key={index}
+                                        scale={esObjeto ? item.scale || 0.5 : 0.5}
+                                        color={color}
+                                        style={{
+                                        marginTop: `${mt}px`,
+                                        lineHeight: 1.6,
+                                        fontWeight: esObjeto && item.bold ? "bold" : "normal"
+                                        }}
+                                    >
+                                        {esObjeto ? item.text : item}
+                                    </ExtraInfoText>
+                                    );
+                                })}
+                            </ExtraBlock>
+                        )}   
                     </BlurredBox>
                     {imageBody && <BodyImage src={imageBodyPath} scale={4}/>}
                     <Container>
@@ -430,6 +468,17 @@ const BlurredBox = styled.div`
   box-sizing: border-box;
   margin: 5px auto;
   
+`;
+
+const ExtraBlock = styled.div`
+  margin-top: 7%;
+  padding-top: 7%;
+`;
+
+
+const ExtraInfoText = styled(ResponsiveText)`
+  display: block;
+  margin-top: 8px;
 `;
 
 

@@ -305,28 +305,28 @@ const TextComponent = (number) => {
                                 CONEXIÓN CON UNO MISMO…
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '20px',color:"white"}}>
-                                Estoy en conexión con mi ser superior
+                                ¿Estoy en conexión con mi ser superior?
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '10px',color:"white"}}>
-                                Estoy en sintonía con mi ser más elevado
+                                ¿Estoy en sintonía con mi ser más elevado?
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '10px',color:"white"}}>
-                                Estoy unido a mi esencia divina
+                                ¿Estoy unido a mi esencia divina?
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '10px',color:"white"}}>
-                                Me encuentro imparcial al resultado de la terapia
+                                ¿Me encuentro imparcial al resultado de la terapia?
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '10px',color:"white"}}>
-                                Estoy en total plenitud para dar energía
+                                ¿Estoy en total plenitud para dar energía?
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '10px',color:"white"}}>
-                                Estoy en total plenitud para recibir energía
+                                ¿Estoy en total plenitud para recibir energía?
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '10px',color:"white"}}>
-                                Estoy en total plenitud para sentir la energía
+                                ¿Estoy en total plenitud para sentir la energía?
                             </ResponsiveText>
                             <ResponsiveText scale={0.5} style={{marginTop: '10px',color:"white"}}>
-                                Estoy en total plenitud para obtener información
+                                ¿Estoy en total plenitud para obtener información?
                             </ResponsiveText>
                         </>,
                     '6':
