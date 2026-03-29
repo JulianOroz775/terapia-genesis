@@ -62,7 +62,7 @@ const IntroText = () => {
                     </Alert>
                 </ContainerAlert>}
                 {TextComponent(number, setNumber) }
-                {(number === 6 && !localStorage.getItem("problems")) && <Problems problems={problems} setProblems={setProblems} setIsTextFieldFocused={setIsTextFieldFocused}/>}
+                {(number === 4 && !localStorage.getItem("problems")) && <Problems problems={problems} setProblems={setProblems} setIsTextFieldFocused={setIsTextFieldFocused}/>}
 
                 <Navigate number={number} setNumber={setNumber} problems={problems} setShowAlert={setShowAlert}/>
          </BlurredBox>
@@ -142,10 +142,6 @@ const NextFunction = ({number, setNumber, problems, setShowAlert}) => {
             return setNumber((prev) => prev + 1);
         case 3:
             return setNumber((prev) => prev + 1);
-        case 4:
-            return setNumber((prev) => prev + 1);
-        case 5:
-            return setNumber((prev) => prev + 1);
         default:
             if (!localStorage.getItem("problems") && !problems.some(problem => problem)) {
                 setShowAlert(true)
@@ -168,8 +164,6 @@ const BackFunction = ({number, setNumber}) => {
         case 3:
             return setNumber((prev) => prev - 1);
         case 4:
-            return setNumber((prev) => prev - 1);
-        case 5:
             return setNumber((prev) => prev - 1);
         default:
             return navigate('/');
@@ -253,53 +247,6 @@ const TextComponent = (number) => {
                         </>,
                     '3':
                         <>
-                            <ResponsiveText scale={0.6} style={{color:"white"}}>
-                                ORACION PARA TRANSMUTAR ENERGIAS
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.6} bold style={{marginTop: '15px',color:"white"}}>
-                                REGISTROS AKASHICOS – VIDAS PASADAS
-                                (Utilizando el péndulo cuántico, decimos)
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.5} style={{marginTop: '15px',color:"white"}}>
-                                13 veces 1 - 13 veces 1 – 13 veces 1
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.5} style={{marginTop: '15px',color:"white"}}>
-                                Pido al responsable de los registros Akáshicos que, en nombre de nuestro Señor Jesucristo, elimine o transmute todos los registros vinculados al suceso en el que estamos trabajando... y dado que ha sido cumplido, doy infinitas gracias.
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.5} style={{marginTop: '15px',color:"white"}}>
-                                13 veces 1 - 13 veces 1 – 13 veces 1
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.6} bold style={{marginTop: '15px',color:"white"}}>
-                                SI HAY PRESENCIAS ENERGÉTICAS EN EL CAMPO ÁURICO
-                                (Utilizando el péndulo cuántico, decimos)
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.5} style={{marginTop: '15px',color:"white"}}>
-                                13 veces 1 - 13 veces 1 – 13 veces 1
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.5} style={{marginTop: '15px',color:"white"}}>
-                                Me dirijo al amado Concilio del Espíritu Santo en nombre de nuestro Señor Jesucristo, guíe a este desencarnado que afecta a (nombre de la consultante), cierre el portal dimensional, iluminando su camino y liberando su aura de energías negativas, te agradecemos, Padre, por este valioso servicio. Amén."
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.5} style={{marginTop: '15px',color:"white"}}>
-                                13 veces 1 - 13 veces 1 – 13 veces 1
-                            </ResponsiveText>
-                        </>,
-                    '4':
-                        <>
-                            <ResponsiveText bold scale={0.6} style={{color:"white"}}>
-                                ESCUDO DE PROTECCION
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.6} style={{marginTop: '15px',color:"white"}}>
-                                9 veces 9 – 9 veces 9 – 9 veces 9
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.6} style={{marginTop: '15px',color:"white"}}>
-                                Padre celestial, te pido que extiendas tu divina protección sobre (nombre de la persona) y todo su entorno. Cúbrelo con tu luz y fortalece su espíritu. Rodéalo con una armadura energética que lo preserve de todo daño. Gracias, Padre, por tu amor incondicional y tu cuidado constante. Amén
-                            </ResponsiveText>
-                            <ResponsiveText scale={0.6} style={{marginTop: '15px',color:"white"}}>
-                                9 veces 9 – 9 veces 9 – 9 veces 9
-                            </ResponsiveText>
-                        </>,
-                    '5':
-                        <>
                             <ResponsiveText bold scale={0.6} style={{color:"white"}}>
                                 PRE-CONEXIÓN CON FUENTE MADRE (Testear) 
                                 CONEXIÓN CON UNO MISMO…
@@ -329,7 +276,7 @@ const TextComponent = (number) => {
                                 ¿Estoy en total plenitud para obtener información?
                             </ResponsiveText>
                         </>,
-                    '6':
+                    '4':
                         <>
                             <ResponsiveText scale={0.6} bold style={{marginTop: '20px',color:"white"}}>
                                 ORACION DE HO’OPONOPONO PARA INICIO DE SESION
@@ -355,8 +302,8 @@ const TextComponent = (number) => {
                             <ResponsiveText scale={0.5} style={{marginTop: '10px', color:"white"}}>
                                 ¿Cuál de estos puntos prioriza el ser de (nombre del consultante) para sanar?
                             </ResponsiveText>
-
-                        </>
+                        </>,
+                  
                 }[number]
             }
         </TextContainer>

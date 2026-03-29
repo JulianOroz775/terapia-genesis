@@ -33,7 +33,8 @@ export const bloquesExtraPorPrefijo = [
     }
   },
   {
-    prefijo: ["petalo-5/6/1/14","petalo-5/6/1/1","petalo-5/6/1/2","petalo-5/6/1/3","petalo-5/6/1/4"],
+    prefijo: ["petalo-5/6/1/1","petalo-5/6/1/2","petalo-5/6/1/3","petalo-5/6/1/4","petalo-5/6/1/14"],
+    exacto: true,
     bloqueExtra: {
       titulo: "ORACION PARA TRANSMUTAR ENERGIAS",
       contenido: [

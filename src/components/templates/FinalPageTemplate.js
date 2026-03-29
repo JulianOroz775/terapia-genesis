@@ -124,11 +124,14 @@ const FinalPageTemplate = ({ pageContext }) => {
 
     //Oraciones
     const bloqueExtraEncontrado = bloquesExtraPorPrefijo.find(item => {
-    const prefijos = Array.isArray(item.prefijo)
-    ? item.prefijo
-    : [item.prefijo]; // 👈 lo convierto en array si es string
+    const prefijos = Array.isArray(item.prefijo) ? item.prefijo : [item.prefijo];
 
-    return prefijos.some(pref => linkName.startsWith(pref));
+        return prefijos.some(pref => {
+            if (item.exacto) {
+            return linkName === pref; // 👈 MATCH EXACTO
+            }
+            return linkName.startsWith(pref);
+        });
     });
 
     const bloqueExtra = bloqueExtraEncontrado?.bloqueExtra;
