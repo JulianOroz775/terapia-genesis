@@ -381,6 +381,19 @@ const createAndSendPDF = async () => {
 
 
 const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBold , addWatermarkedPage) => {
+    
+    const esPetaloContenedor = (
+        petalo.subPetalos && petalo.subPetalos.length > 0 &&
+        petalo.title.length <= 1 &&
+        !petalo.text &&
+        !petalo.textField
+    );
+    if (esPetaloContenedor){
+        console.log("SALTANDO CONTENEDOR:", petalo.linkName, petalo.title);
+        return { y, currentPage };
+    } 
+    
+    
     if (petalo.subPetalos && petalo.subPetalos.length > 0) {
         if (petalo.title.length > 2) {
             const renderTitle = (petalo.title === 'Emociones')
@@ -430,6 +443,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
             // 🚨 Nuevo control: si hay fieldText y NO es legado, no imprimo petalo.text
             if (petalo.noText && !petalo.isLegado) {
                 // no escribo nada del text normal
+                 console.log("TEXTFIELD:", petalo.linkName, "| compact:", petalo.textFieldCompact, "| value:", petalo.textField);
             }else if(petalo.onlyTitleP || petalo.onlyT ){
                 // 🔹 Imprime SOLO títuloPage - title    ¡¡Especialmente en VIDAS PASADAS!!
                 y-= 16;
@@ -551,7 +565,7 @@ const textPetalo = async (petalo, currentPage, y, pdfDoc, maxWidth, font, fontBo
         
         // 🔹 Solo agrego este espacio extra si NO es compacto
         if (petalo.textFieldCompact) {
-            // no bajo nada
+            y -= 4;  // espacio compacto
         } else {
             y -= 12;  // espacio normal
         }
@@ -605,18 +619,10 @@ if (petalo.textField && !petalo.isLegado) {
         }
 
         // gap entre un bullet y el siguiente
-        y -= (esFuente2 ? BULLET_GAP : BULLET_GAP); // podés dejar un valor fijo
+        y -= petalo.textFieldCompact ? 15: 25;
     }
 
-    // margen inferior del bloque de bullets (separación del próximo título)
-    if (petalo.textFieldCompact) {
-        // Emociones por teclado: casi sin espacio entre bloques
-        y -= 4;   // probá 0, 4 o 6 hasta que te guste
-    } else {
-        // Resto de los pétalos: separación normal
-        y -= 18;
-    }
-    
+
 }
      
     
@@ -804,6 +810,10 @@ const getListOfPetalos = () => {
 
             const p = getObjectOfLink(link);
             if (!p) return;
+
+            // AGREGAR ESTO:
+            console.log("→ título:", p.title, "| linkName:", p.linkName, "| subPetalos:", p.subPetalos?.length ?? 0, "| textField:", p.textField);
+
 
             const enCorreccion = isStringInCorrecciones(historyArrayOrden, link);
             const key = p.linkName || "";

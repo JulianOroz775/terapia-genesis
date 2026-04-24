@@ -279,31 +279,31 @@ const petalos = [
                         linkName: "petalo-2/1/3", image: 'boton2', title: "C", index: 2, colorBorder: "green", subPetalos: [
                             {
                                 linkName: "petalo-2/1/3/1", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 1",
-                                text: "INEFICAZ. INFERIORIDAD. INFLEXIBILIDAD. INSATISFECHO",noText: true
+                                text: "INEFICAZ. INFERIORIDAD. INFLEXIBILIDAD. INSATISFECHO",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/3/2", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 2",
-                                text: "INSEGURIDAD. INTOLERANTE. IRA. LLANTO",noText: true
+                                text: "INSEGURIDAD. INTOLERANTE. IRA. LLANTO",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/3/3", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 3",
-                                text: "LUJURIA. MELANCOLÍA. MIEDO. NEGATIVIDAD",noText: true
+                                text: "LUJURIA. MELANCOLÍA. MIEDO. NEGATIVIDAD",noText: true,textFieldCompact: true 
                             },
                             {
                                 linkName: "petalo-2/1/3/4", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 4",
-                                text: "NERVIOSISMO. OBSESIONADO. OBSTINACIÓN. ODIO",noText: true
+                                text: "NERVIOSISMO. OBSESIONADO. OBSTINACIÓN. ODIO",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/3/5", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 5",
-                                text: "ORGULLO. PÁNICO. PENA. PERDIDO",noText: true
+                                text: "ORGULLO. PÁNICO. PENA. PERDIDO",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/3/6", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 6",
-                                text: "PESAR. PESIMISTA. PREOCUPACIÓN. RABIA",noText: true
+                                text: "PESAR. PESIMISTA. PREOCUPACIÓN. RABIA",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/3/7", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 7",
-                                text: "RECHAZO. RENCOR. REPRIMIDO. RESENTIMIENTO",noText: true
+                                text: "RECHAZO. RENCOR. REPRIMIDO. RESENTIMIENTO",noText: true,textFieldCompact: true
                             },
                         ]
                     },
@@ -311,31 +311,31 @@ const petalos = [
                         linkName: "petalo-2/1/4", image: 'boton2', title: "D", index: 3, colorBorder: "yellow", subPetalos: [
                             {
                                 linkName: "petalo-2/1/4/1", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "D 1",
-                                text: "SENTIMIENTO DE ABANDONO. SENTIMIENTO DE TRAICIÓN. SENTIR FALTA DE APOYO. SENTIR UNA PÉRDIDA EMOCIONAL",noText: true
+                                text: "SENTIMIENTO DE ABANDONO. SENTIMIENTO DE TRAICIÓN. SENTIR FALTA DE APOYO. SENTIR UNA PÉRDIDA EMOCIONAL",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/4/2", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "D 2",
-                                text: "SENTIR UNA PÉRDIDA ESPIRITUAL. SENTIR UNA PERDIDA MATERIAL. SENTIR UNA PÉRDIDA MENTAL. SENTIRSE ACOMPLEJADO",noText: true
+                                text: "SENTIR UNA PÉRDIDA ESPIRITUAL. SENTIR UNA PERDIDA MATERIAL. SENTIR UNA PÉRDIDA MENTAL. SENTIRSE ACOMPLEJADO",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/4/3", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "D 3",
-                                text: "SENTIRSE ARROGANTE. SENTIRSE DERROTADO. SENTIRSE EN DESVENTAJA. SENTIRSE ENGAÑADO",noText: true
+                                text: "SENTIRSE ARROGANTE. SENTIRSE DERROTADO. SENTIRSE EN DESVENTAJA. SENTIRSE ENGAÑADO",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/4/4", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "D 4",
-                                text: "SENTIRSE HUMILLADO. SENTIRSE OFENDIDO. SHOCK. SOBERBIA",noText: true
+                                text: "SENTIRSE HUMILLADO. SENTIRSE OFENDIDO. SHOCK. SOBERBIA",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/4/5", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "D 5",
-                                text: "SUFRIMIENTO. SUMISIÓN. SUSTO. TEMOR",noText: true
+                                text: "SUFRIMIENTO. SUMISIÓN. SUSTO. TEMOR",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/4/6", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "D 6",
-                                text: "TERROR. TIMIDEZ. VACIO. VIOLENCIA",noText: true
+                                text: "TERROR. TIMIDEZ. VACIO. VIOLENCIA",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/4/7", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "D 7",
-                                text: "VENGANZA. VERGÜENZA. VICTIMISMO. VULNERABLE",noText: true
+                                text: "VENGANZA. VERGÜENZA. VICTIMISMO. VULNERABLE",noText: true,textFieldCompact: true
                             },
                         ]
                     }
