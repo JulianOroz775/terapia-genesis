@@ -91,7 +91,7 @@ const Buttons = ({petalos,bigButtonTitle,circuloBase,onClick, noNumber}) => {
 
                     
                 } else if (event.key === 'Backspace')
-                    navigate("/")
+                    navigate("/indextg1")
                 else if (event.key === 'o' || event.key === 'O')
                     navigate("/intro-text");
             }
@@ -198,7 +198,7 @@ const Buttons = ({petalos,bigButtonTitle,circuloBase,onClick, noNumber}) => {
                     <LoadB src="/images/simbolos/descarga2.png" alt="GuardarPDF" title="Guardar como PDF" onClick={handlePDF} />
                     <LoadB src="/images/simbolos/borrado.png" alt="Borrar Ultimo" title="Borrar Ultimo" onClick={handleBorrar} />
                     <LoadB src="/images/simbolos/oraciones2.png" alt="Oraciones" title="Oraciones" onClick={() => navigate("/intro-text")} />
-                    <LoadB src="/images/simbolos/inicio2.png" alt="Inicio" title="Inicio" onClick={() => navigate('/')} />
+                    <LoadB src="/images/simbolos/inicio2.png" alt="Inicio" title="Inicio" onClick={() => navigate('/indextg1')} />
                     <LoadB src="/images/simbolos/legado.png" alt="Legado" title="Volver al Legado" onClick={() => navigate("/circulo-base/petalo-3/2/2/5/")} />
                 </LoadButtons>
             </BottomRightBox>

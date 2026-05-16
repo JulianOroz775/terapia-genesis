@@ -1,215 +1,268 @@
-import styled from 'styled-components';
+import * as React from "react";
 import { Helmet } from "react-helmet";
-import backgroundImage from '../../static/images/portada.webp';
-import ResponsiveText from "../components/apis/ResponsiveText";
-import logo from "../images/logo.png";
-import {navigate} from "gatsby";
-import {useEffect, useState} from "react";
-import useInstall from "../components/UseInstall";
+import { Link } from "gatsby";
 import LoginCheck from "../components/login/LoginCheck";
+import styled, { createGlobalStyle } from "styled-components";
+import bg from "../../static/images/portada.webp";
+import logo from "../images/logo.png";
+import card1Bn from "../../static/images/card-nivel1-bn.png";
+import card1Color from "../../static/images/card-nivel1.png";
+import card2Bn from "../../static/images/card-nivel2-bn.png";
+import card2Color from "../../static/images/card-nivel2.png";
 import {Alert, TextField} from "@mui/material";
+
+
+const GlobalStyle = createGlobalStyle`
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+`;
+
+const clearSessionData = () => {
+  localStorage.removeItem("paciente");
+  localStorage.removeItem("dob");
+  localStorage.removeItem("problems");
+  localStorage.setItem("history", JSON.stringify([]));
+}
 const Index = () => {
-    const [paciente, setPaciente] = useState(null);
-    const [showAlert, setShowAlert] = useState(false);
-    const [isTextFieldFocused, setIsTextFieldFocused] = useState(false);
+  
+  React.useEffect(() => {
+  clearSessionData();
+}, []);
 
-    const handleStartButtonClick = () => {
-        if (!paciente) {
-            setShowAlert(true)
-            setTimeout(() => {
-                setShowAlert(false)
-            },4000)
-        } else {
-            toIntroText(paciente);
-        }
-    };
 
-    useEffect(() => {
+  return (
+    <LoginCheck>
+      <GlobalStyle />
+      <Helmet>
+        <title>Terapia Génesis – Seleccionar nivel</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
 
-        const handleKeyDown = (event) => {
-            if (isTextFieldFocused) return;
-            if (event.key === 'Enter') {
-                navigate('/circulo-base');
-            } else if (event.key === 'Backspace') {
-                navigate('/');
-            } else if (event.key === 'ArrowLeft') {
-                navigate(-1);
-            } else if (event.key === 'ArrowRight' || event.key === ' ') {
-                handleStartButtonClick();
-            }
-        };
+      <Page>
+        <Background />
+        <DarkOverlay />
 
-        document.addEventListener('keydown', handleKeyDown);
+        <TopBar>
+            <Logo src={logo} alt="Génesis" />
+        </TopBar>
 
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [paciente]);
+        <Center>
+          <Title>Elegí tu nivel espiritual</Title>
 
-    return (
-        <LoginCheck>
-            <Helmet>
-                <title>Terapia Genesís APP</title>
-                <meta name="description" content="APP GÉNESIS®️ – Plataforma oficial para terapeutas certificados en Terapia Cuántica GÉNESIS®️. Aplicá protocolos cuánticos, conectá con el alma, liberá bloqueos, abrí caminos y acompañá procesos de profunda transformación. 📍Calle 26 N°4422, Necochea. ✉️ formacionterapiagenesis@gmail.com 📞 +54 9 2262 627113 / 497258" />
-            </Helmet>
-            <Background>
-                <ContainerInstall>
-                    <MinimalisticInstallButton/>
-                </ContainerInstall>
-                <Container>
-                    {showAlert && <ContainerAlert>
-                        <Alert severity="error">
-                            Debes completar todos los campos
-                        </Alert>
-                    </ContainerAlert>}
-                    <CenterContainer>
-                        <Logo src={logo} alt="Terapia Génesis" />
-                        <StartButton onClick={() =>
-                            handleStartButtonClick()
-                        }>
-                            <ResponsiveText scale={0.6} bold color={'#1f1e1e'}>
-                                INICIAR CONEXION
-                            </ResponsiveText>
-                        </StartButton>
-                            <TextField id="paciente" label="Paciente" variant="filled" margin="normal"
-                                       onChange={(e) => {
-                                           setPaciente(e.target.value);
-                                       }}
-                                       onFocus={() => setIsTextFieldFocused(true)}
-                                       onBlur={() => setIsTextFieldFocused(false)}
-                                       sx={{
-                                           backgroundColor: 'white',
-                                           '&:hover': {
-                                               backgroundColor: 'white',
-                                           },
-                                           '&.Mui-focused': {
-                                               backgroundColor: 'white',
-                                           },
-                                           '& .MuiFilledInput-root': {
-                                               backgroundColor: 'white'
-                                           }
-                                       }}
-                            />
+          <Cards>
+            <CardLink to="/indextg1" aria-label="Terapia cuántica Génesis Nivel I">
+              <CardFrame $hoverBorder="rgba(245,245,245,0.95)" $glow="rgba(255,255,255,0.55)">
+                <CardImage src={card1Bn} alt="" />
+                <CardImageHover src={card1Color} alt="" />
+              </CardFrame>
+            </CardLink>
 
-                    </CenterContainer>
-                </Container>
-            </Background>
-        </LoginCheck>
-    );
-};
-
-const toIntroText = (paciente) => {
-  localStorage.setItem("history", JSON.stringify([]))
-  localStorage.setItem('paciente', paciente)
-  localStorage.removeItem("problems")
-  navigate('/intro-text');
-};
-
-const ContainerAlert = styled.div`
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  z-index: 999;
-`;
-
-const ContainerInstall = styled.div`
-  display: flex;
-  justify-content: right;
-  align-items: center;
-`;
-
-const MinimalisticInstallButton = () => {
-  const [canInstall, install] = useInstall();
-  return canInstall && <StyledMinimalisticInstallButton onClick={install}>
-    <ButtonText scale={0.3} bold>Instalar</ButtonText>
-  </StyledMinimalisticInstallButton>
+            <CardLink to="/index5D" aria-label="Génesis 5D Nivel II">
+              <CardFrame $hoverBorder="rgba(255, 255, 255, 0.95)" $glow="rgba(255, 255, 255, 0.55)">
+                <CardImage src={card2Bn} alt="" />
+                <CardImageHover src={card2Color} alt="" />
+              </CardFrame>
+            </CardLink>
+          </Cards>
+        </Center>
+      </Page>
+    </LoginCheck>
+  );
 }
 
-const ButtonText = styled(ResponsiveText)`
-  padding: 9px 40px;
-  color: white;
-`;
+/* -------------------- ESTILOS -------------------- */
 
-const StyledMinimalisticInstallButton = styled.div`
-  cursor: pointer;
-  color: white;
-  margin-right: 5px;
-  user-select: none;
+const sm = "@media (max-width: 480px)";
+const md = "@media (max-width: 768px)";
 
-  border-radius: 8px;
-  margin-left: 30px;
-  border: double 1px transparent;
-  background-image: linear-gradient(30deg, #3e1b38, #184153), linear-gradient(30deg, #f93fff, #0abbff);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-
-  :hover {
-    background-image: linear-gradient(30deg, #531f4a, #1d5269), linear-gradient(30deg, #f957ff, #25bffa);
-  }
-
-  h2 {
-    margin: 0;
-    padding: 20px;
-  }
-`;
-
-const Logo = styled.img`
-  height: 40vh;     /* 🔥 más grande */
-  width: auto;
-  object-fit: contain;
-  margin-bottom: 40px;
-  user-select: none;
-
-  @media (max-width: 1024px) {
-    height: 260px;
-  }
-
-  @media (max-width: 768px) {
-    height: 220px;
-  }
-
-  @media (max-width: 480px) {
-    height: 180px;
-  }
+const Page = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
 `;
 
 const Background = styled.div`
-  background-image: url(${backgroundImage});
+  position: fixed;
+  inset: 0;
+  background-image: url(${bg});
   background-size: cover;
   background-position: center;
-  width: 100%;
+  background-repeat: no-repeat;
+  z-index: -3;
+`;
+
+const DarkOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(
+    circle at 50% 25%,
+    rgba(20, 70, 120, 0.18),
+    rgba(6, 18, 40, 0.62)
+  );
 `;
 
-const CenterContainer = styled.div`
+const TopBar = styled.div`
+   width: 100%;
+  padding: 6px 48px 6px 0px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  ${md} { padding: 4px 20px 4px 0px; }
+  ${sm} { padding: 2px 14px 2px 0px; }
+`;
+
+const Logo = styled.img`
+  height: 115px;
+  width: auto;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.5));
+  ${md} { height: 90px; }
+  ${sm} { height: 65px; }
+`;
+
+
+
+const Center = styled.main`
+  min-height: calc(100vh - 110px);
+  display: flex;
   flex-direction: column;
-`;
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-
+  justify-content: center;
+  padding: 12px 18px 64px;
 `;
 
-const StartButton = styled.div`
-  background-color: #eeeeee;
-  border-radius: 5px;
-  padding: 10px 20px;
-  user-select: none;
-  cursor: pointer;
+const Title = styled.h1`
+  margin: 0 0 34px;
+  font-family: Arvo, serif;
+  color: rgba(255,255,255,0.95);
+  font-size: 54px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.65);
 
-  :hover {
-    filter: brightness(1.8);
+  @media (max-width: 1024px) {
+    font-size: 46px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 34px;
+    margin-bottom: 22px;
   }
 `;
 
+const Cards = styled.section`
+  display: grid;
+  grid-template-columns: repeat(2, 360px);
+  gap: 30%;
+  justify-content: center;
+  align-items: center;
 
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 26px;
+  }
+`;
+
+const CardLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const CardFrame = styled.div`
+  width: 360px;
+  height: 360px;
+  border-radius: 33px;
+  position: relative;
+  overflow: hidden;
+
+
+  box-shadow:
+    6px 4px 6px rgba(0, 0, 0, 0.25),
+    0 0 10px rgba(255, 255, 255, 0.35),
+    inset 0 6px 8px rgba(255, 255, 255, 0.85);
+
+  transition:
+    transform 200ms linear,
+    border-color 200ms linear,
+    box-shadow 200ms linear;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 33px;
+    pointer-events: none;
+    opacity: 0;
+    box-shadow:
+      0 0 0 2px ${(p) => p.$hoverBorder},
+      0 0 10px ${(p) => p.$glow},
+      0 0 18px ${(p) => p.$glow};
+    transition: opacity 200ms linear, box-shadow 200ms linear;
+  }
+
+  &:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: ${(p) => p.$hoverBorder};
+
+    transition:
+      transform 1000ms linear 1ms,
+      border-color 1000ms linear 1ms,
+      box-shadow 1000ms linear 1ms;
+
+    box-shadow:
+      6px 4px 6px rgba(0, 0, 0, 0.25),
+      0 0 12px rgba(255, 255, 255, 0.85),
+      inset 0 6px 8px rgba(255, 255, 255, 0.95);
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transition: opacity 1000ms linear 1ms, box-shadow 1000ms linear 1ms;
+  }
+
+  @media (max-width: 900px) {
+    width: min(360px, 92vw);
+    height: min(360px, 92vw);
+  }
+`;
+
+const CardImage = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const CardImageHover = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+
+  transition: opacity 200ms linear;
+
+  ${CardFrame}:hover & {
+    opacity: 1;
+    transition: opacity 260ms ease-out;
+  }
+`;
 
 export default Index;

@@ -99,7 +99,7 @@ const FinalPageTemplate = ({ pageContext }) => {
                         }
                      
                  } else if (event.key === 'Backspace')
-                     navigate("/")
+                     navigate("/indextg1");
                  else if (event.key === 'o' || event.key === 'O')
                      navigate("/intro-text");
              }
@@ -169,6 +169,15 @@ const FinalPageTemplate = ({ pageContext }) => {
             </div>
         });
     }
+    
+    const parseBold = (text) => {
+        if (!text) return null;
+        const parts = text.split(/\*([^*]+)\*/g);
+        return parts.map((part, i) =>
+            i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+    );
+    };
+
     return <LoginCheck>
         <PageContainer>
             <Background style={{backgroundImage: `url(${imagePath})`}}>
@@ -201,7 +210,7 @@ const FinalPageTemplate = ({ pageContext }) => {
                         <ResponsiveText scale={0.9} color={color}>{titlePage}</ResponsiveText>
                         <ResponsiveText scale={0.7} color={color}>{titleText}</ResponsiveText>
                         {separation ? textComponents
-                            : <Text scale={0.5} color={color}>{desc}</Text>}
+                            : <Text scale={0.5} color={color}>{parseBold(desc)}</Text>}
 
                         {hasFieldText && (
                                 <div
@@ -285,7 +294,7 @@ const FinalPageTemplate = ({ pageContext }) => {
                     <LoadB src="/images/simbolos/descarga2.png" alt="GuardarPDF" title="Guardar como PDF" onClick={handlePDF} />
                     <LoadB src="/images/simbolos/borrado.png" alt="Borrar Ultimo" title="Borrar Ultimo" onClick={handleBorrar} />
                     <LoadB src="/images/simbolos/oraciones2.png" alt="Oraciones" title="Oraciones" onClick={() => navigate("/intro-text")} />
-                    <LoadB src="/images/simbolos/inicio2.png" alt="Inicio" title="Inicio" onClick={() => navigate('/')} />
+                    <LoadB src="/images/simbolos/inicio2.png" alt="Inicio" title="Inicio" onClick={() => navigate('/indextg1')} />
                     <LoadB src="/images/simbolos/legado.png" alt="Legado" title="Volver al Legado" onClick={() => navigate("/circulo-base/petalo-3/2/2/5/")} />
                 </LoadButtons>
                                                 

@@ -26,7 +26,7 @@ const IntroText = () => {
             if (isTextFieldFocused) return;
             switch (event.key) {
                 case 'Backspace':
-                    navigate("/")
+                    navigate("/indextg1");
                     break;
                 case 'ArrowLeft':
                     BackFunction({number, setNumber});
@@ -166,7 +166,7 @@ const BackFunction = ({number, setNumber}) => {
         case 4:
             return setNumber((prev) => prev - 1);
         default:
-            return navigate('/');
+            return navigate('/indextg1');
     }
 }
 
