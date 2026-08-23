@@ -295,7 +295,7 @@ const petalos = [
                             },
                             {
                                 linkName: "petalo-2/1/3/5", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 5",
-                                text: "ORGULLO. PÁNICO. PENA. PERDIDO",noText: true,textFieldCompact: true
+                                text: "ORGULLO. PÁNICO. PENA. SENTIRSE PERDIDO",noText: true,textFieldCompact: true
                             },
                             {
                                 linkName: "petalo-2/1/3/6", image: 'boton2', fieldText: true, separation: true, titlePage: 'Emociones', title: "C 6",
@@ -1851,7 +1851,7 @@ const petalos = [
                             },
                             {
                                 linkName: "petalo-3/6/1/10", image: 'boton3', titlePage: '¿Que me bloquea?', title: "A 10",
-                                text: "JEFE",onlyText: true
+                                text: "JEFE/SER JEFE",onlyText: true
                             },
                             {
                                 linkName: "petalo-3/6/1/11", image: 'boton3', titlePage: '¿Que me bloquea?', title: "A 11",
@@ -1899,7 +1899,7 @@ const petalos = [
                             },
                             {
                                 linkName: "petalo-3/6/2/10", image: 'boton3', titlePage: '¿Que me bloquea?', title: "B 10",
-                                text: "ROBAR DINERO",onlyText: true
+                                text: "ROBAR DINERO/QUE ME ROBEN",onlyText: true
                             },
                             {
                                 linkName: "petalo-3/6/2/11", image: 'boton3', titlePage: '¿Que me bloquea?', title: "B 11",
@@ -1915,7 +1915,7 @@ const petalos = [
                             },
                             {
                                 linkName: "petalo-3/6/3/2", image: 'boton3', titlePage: '¿Que me bloquea?', title: "C 2",
-                                text: "AUSENCIA DE EJERCICIO",onlyText: true
+                                text: "AUSENCIA DE EJERCICIO/EJERCICIO",onlyText: true
                             },
                             {
                                 linkName: "petalo-3/6/3/3", image: 'boton3', titlePage: '¿Que me bloquea?', title: "C 3",
